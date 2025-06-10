@@ -4,6 +4,7 @@ module SetGame
       @cards = deck_builder.build_deck
     end
 
+    # @return [Enumerable<Card>]
     def generate
       all_puzzles.find(&method(:valid?))
     end
