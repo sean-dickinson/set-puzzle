@@ -1,31 +1,16 @@
 <script setup lang="ts">
-type Card = {
-  color: string;
-  shape: string;
-  number: number;
-  shade: string;
-}
-type Puzzle = {
-  cards: Card[];
-  date: string;
-}
-const {puzzle} = defineProps<{puzzle: Puzzle}>();
-const cardToString = (card: Card) => {
-  const base = `${card.number} ${card.shade}, ${card.color} ${card.shape}`;
-  if (card.number === 1) {
-    return base;
-  } else {
-    return `${base}s`;
-  }
-};
+
+import type {SetCard} from "@/types/set-types";
+import Card from "@/components/Card.vue";
+
+const {cards, date} = defineProps<{ cards: SetCard[], date: string}>();
+
 </script>
 
 <template>
-<h1>Puzzle for {{puzzle.date}}</h1>
+<h1>Puzzle for {{date}}</h1>
   <div class="cards">
-    <div v-for="(card, i) in puzzle.cards" :key="i" class="card">
-      {{cardToString(card)}}
-    </div>
+    <Card v-for="(card, i) in cards" :key="i" v-bind="card" />
   </div>
 </template>
 

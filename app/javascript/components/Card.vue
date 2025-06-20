@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import  type {SetCard} from "@/types/set-types";
+import Oval from "@/components/shapes/Oval.vue";
+import Diamond from "@/components/shapes/Diamond.vue";
+import Squiggle from "@/components/shapes/Squiggle.vue";
+import {computed, markRaw} from "vue";
+
+const { number, shading, shape, color } = defineProps<SetCard>();
+const shapeComponents = {
+  oval: Oval,
+  diamond: Diamond,
+  squiggle: Squiggle,
+};
+
+const shapeComponent = computed(() => {
+  return markRaw(shapeComponents[shape]);
+});
+</script>
+
+<template>
+<div class="card">
+  <template v-for="n in number" :key="n">
+    <component :is="shapeComponent" :color="color" :shading="shading" />
+  </template>
+</div>
+</template>
+
+<style scoped>
+.card {
+  --card-bg-color: white;
+  --card-border-color: #888;
+
+  background-color: var(--card-bg-color);
+  border: 2px solid var(--card-border-color);
+  border-radius: 12px;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  transition: transform 0.2s ease;
+
+  &.card--active {
+    transform: scale(0.9);
+    --card-border-color: red;
+  }
+}
+</style>

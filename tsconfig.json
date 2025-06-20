@@ -1,11 +1,24 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "strict": false,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "paths": {
+      "@/*": [
+        "app/javascript/*"
+      ]
     },
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "baseUrl": ".",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ]
+  },
+  "include": [
+    "app/javascript/**/*.ts",
+    "app/javascript/**/*.d.ts",
+    "app/javascript/**/*.vue"
   ]
 }
