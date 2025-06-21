@@ -2,6 +2,7 @@ html {
     --set-red-color: #e86565;
     --set-green-color: #28aa28;
     --set-purple-color: #671fc3;
+    --shape-border-width: 6px;
 
     *, ::before, ::after {
         box-sizing: border-box;

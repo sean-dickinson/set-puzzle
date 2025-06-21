@@ -4,10 +4,11 @@
 
 <style scoped>
 .oval {
-  border-radius: 1rem;
+  flex: 1 0 auto;
+  border-radius: 2rem;
   border: 2px solid var(--shape-color);
-  aspect-ratio: 3 / 1;
-  height: 3rem;
+  aspect-ratio: 2 / 1;
+  max-height: 3rem;
   background: var(--shape-background);
 }
 </style>

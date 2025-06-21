@@ -23,7 +23,7 @@ const cssClasses = computed(() => [
 </script>
 
 <template>
-<div class="card">
+<div class="card" :class="{'card--with-gap': shape !== 'squiggle'}">
   <template v-for="n in number" :key="n">
     <component :is="shapeComponent" :class="cssClasses" />
   </template>
@@ -39,19 +39,23 @@ const cssClasses = computed(() => [
   border: 2px solid var(--card-border-color);
   border-radius: 12px;
   padding: 1rem;
+  width: 100%;
   height: 15rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
 
   transition: transform 0.2s ease;
 
   &.card--active {
     transform: scale(0.9);
     --card-border-color: red;
+  }
+
+  &.card--with-gap {
+    gap: 0.75rem;
   }
 }
 </style>
