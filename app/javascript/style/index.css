@@ -1,0 +1,41 @@
+html {
+    --set-red-color: #e86565;
+    --set-green-color: #28aa28;
+    --set-purple-color: #671fc3;
+
+    *, ::before, ::after {
+        box-sizing: border-box;
+    }
+}
+
+.color {
+    &.color--red {
+        --shape-color: var(--set-red-color);
+    }
+    &.color--green {
+        --shape-color: var(--set-green-color);
+    }
+    &.color--purple {
+        --shape-color: var(--set-purple-color);
+    }
+}
+
+.shade {
+    &.shade--solid {
+     --shape-background: var(--shape-color);
+    }
+    &.shade--striped {
+        --stripe-width: 2px;
+        --stripe-gap: 10px;
+        --shape-background: repeating-linear-gradient(
+            90deg,
+            var(--shape-color),
+            var(--shape-color) var(--stripe-width),
+            transparent var(--stripe-width),
+            transparent var(--stripe-gap)
+        );
+    }
+    &.shade--open {
+        --shape-background: transparent;
+    }
+}

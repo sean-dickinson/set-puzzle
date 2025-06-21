@@ -6,8 +6,13 @@ type CardNumber = 1 | 2 | 3;
 export type SetCard = {
   shape: CardShape;
   color: CardColor;
-  shading: CardShading;
+  shade: CardShading;
   number: CardNumber;
 };
 
-export type ShapeProps = Pick<SetCard, 'color' | 'shading'>
+export type ShapeProps = Pick<SetCard, 'color' | 'shade'>
+
+export type Puzzle = {
+  cards: SetCard[],
+  date: string,
+}

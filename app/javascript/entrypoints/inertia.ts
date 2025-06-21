@@ -1,5 +1,6 @@
 import { createInertiaApp } from '@inertiajs/vue3'
-import { createApp, DefineComponent, h } from 'vue'
+import { createApp, type DefineComponent, h } from 'vue'
+import '../style/index.css';
 
 createInertiaApp({
   // Set default page title

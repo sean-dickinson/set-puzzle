@@ -1,16 +1,18 @@
 <script setup lang="ts">
 
-import type {SetCard} from "@/types/set-types";
+import type {Puzzle} from "@/types/set-types";
 import Card from "@/components/Card.vue";
 
-const {cards, date} = defineProps<{ cards: SetCard[], date: string}>();
+const {puzzle} = defineProps<{
+  puzzle: Puzzle;
+}>();
 
 </script>
 
 <template>
-<h1>Puzzle for {{date}}</h1>
+<h1>Puzzle for {{puzzle.date}}</h1>
   <div class="cards">
-    <Card v-for="(card, i) in cards" :key="i" v-bind="card" />
+    <Card v-for="(card, i) in puzzle.cards" :key="i" v-bind="card" />
   </div>
 </template>
 

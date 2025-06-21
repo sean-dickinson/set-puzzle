@@ -1,57 +1,21 @@
-<script setup lang="ts">
-import type { ShapeProps } from "@/types/set-types";
-import {computed} from "vue";
-const { color, shading } = defineProps<ShapeProps>();
-
-const cssClasses = computed(() => {
-  return {
-    'diamond--filled': shading === 'solid',
-    'diamond--striped': shading === 'striped',
-    'diamond--open': shading === 'open',
-    [`diamond--${color}`]: true,
-  };
-});
-</script>
-
 <template>
-<div class="diamond" :class="cssClasses"></div>
+<div class="diamond">
+  <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="150,0 300,50 150,100 0,50" fill="var(--shape-background)" stroke="var(--shape-color)" stroke-width="2"/>
+  </svg>
+</div>
 </template>
 
 <style scoped>
 .diamond {
-  border-radius: 50%;
-  border: 2px solid var(--card-color);
-  aspect-ratio: 3 / 1;
   height: 3rem;
+  aspect-ratio: 3 / 1;
 
-  &.diamond--filled {
-    background-color: var(--card-color);
-  }
-
-  &.diamond--striped {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--card-color),
-      var(--card-color) 10px,
-      transparent 10px,
-      transparent 20px
-    );
-  }
-  &.diamond--open {
-    background-color: transparent;
-  }
-
-  &.diamond--red {
-    --card-color: #e86565;
-  }
-
-  &.diamond--green {
-    --card-color: #28aa28;
-  }
-
-  &.diamond--purple {
-    --card-color: #671fc3;
+  & svg {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
+
 

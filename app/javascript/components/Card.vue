@@ -5,7 +5,7 @@ import Diamond from "@/components/shapes/Diamond.vue";
 import Squiggle from "@/components/shapes/Squiggle.vue";
 import {computed, markRaw} from "vue";
 
-const { number, shading, shape, color } = defineProps<SetCard>();
+const { number, shade, shape, color } = defineProps<SetCard>();
 const shapeComponents = {
   oval: Oval,
   diamond: Diamond,
@@ -15,12 +15,17 @@ const shapeComponents = {
 const shapeComponent = computed(() => {
   return markRaw(shapeComponents[shape]);
 });
+
+const cssClasses = computed(() => [
+  `shade shade--${shade}`,
+  `color color--${color}`,
+]);
 </script>
 
 <template>
 <div class="card">
   <template v-for="n in number" :key="n">
-    <component :is="shapeComponent" :color="color" :shading="shading" />
+    <component :is="shapeComponent" :class="cssClasses" />
   </template>
 </div>
 </template>
@@ -34,6 +39,7 @@ const shapeComponent = computed(() => {
   border: 2px solid var(--card-border-color);
   border-radius: 12px;
   padding: 1rem;
+  height: 15rem;
 
   display: flex;
   flex-direction: column;
