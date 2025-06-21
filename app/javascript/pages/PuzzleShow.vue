@@ -1,31 +1,18 @@
 <script setup lang="ts">
-type Card = {
-  color: string;
-  shape: string;
-  number: number;
-  shade: string;
-}
-type Puzzle = {
-  cards: Card[];
-  date: string;
-}
-const {puzzle} = defineProps<{puzzle: Puzzle}>();
-const cardToString = (card: Card) => {
-  const base = `${card.number} ${card.shade}, ${card.color} ${card.shape}`;
-  if (card.number === 1) {
-    return base;
-  } else {
-    return `${base}s`;
-  }
-};
+
+import type {Puzzle} from "@/types/set-types";
+import Card from "@/components/Card.vue";
+
+const {puzzle} = defineProps<{
+  puzzle: Puzzle;
+}>();
+
 </script>
 
 <template>
 <h1>Puzzle for {{puzzle.date}}</h1>
   <div class="cards">
-    <div v-for="(card, i) in puzzle.cards" :key="i" class="card">
-      {{cardToString(card)}}
-    </div>
+    <Card v-for="(card, i) in puzzle.cards" :key="i" v-bind="card" />
   </div>
 </template>
 
@@ -33,8 +20,11 @@ const cardToString = (card: Card) => {
 .cards {
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 </style>
