@@ -1,6 +1,5 @@
-import type {Puzzle, SetCard} from "@/types/set-types.ts";
+import type {SetCard} from "@/types/set-types.ts";
 import { type CardTriad, checkSet } from "@/set_game/checkSet.ts";
-import type {MaybeRefOrGetter} from "vue";
 import {ref, computed, watchEffect} from "vue";
 import {getCardId, isSameCardTriad} from "@/set_game/cardHelpers.ts";
 
@@ -9,7 +8,7 @@ const foundSets = ref<CardTriad[]>([]);
 const currentSelection = ref<SetCard[]>([]);
 const isGameOver = computed(() => foundSets.value.length === 6);
 const errorMessage = ref('');
-export function useSetGame(Puzzle: MaybeRefOrGetter<Puzzle>){
+export function useSetGame(){
     const isSetAlreadyFound = (cards: CardTriad): boolean =>
          foundSets.value.some(set => isSameCardTriad(set, cards));
     const clearSelection = () => currentSelection.value = [];
@@ -51,5 +50,6 @@ export function useSetGame(Puzzle: MaybeRefOrGetter<Puzzle>){
         toggleSelection,
         foundSets,
         currentSelection,
+        errorMessage
     }
 }
