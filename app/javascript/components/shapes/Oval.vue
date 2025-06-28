@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type {SetCard} from "@/types/set-types.ts";
-import {useStripesPattern} from "@/composables/useStripesPattern.ts";
+import {useShapeBackground} from "@/composables/useShapeBackground.ts";
 
 const {shade} = defineProps<{
   shade: SetCard['shade']
 }>();
 
-const {isStriped, patternId, fill, StripesPattern} = useStripesPattern(() => shade);
+const {isStriped, patternId, fill, StripesPattern} = useShapeBackground(() => shade);
 </script>
 <template>
   <svg class="oval" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">

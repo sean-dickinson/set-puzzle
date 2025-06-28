@@ -40,7 +40,8 @@ const cssClasses = computed(() => [
   border-radius: 12px;
   padding: 1rem;
   width: 100%;
-  height: 15rem;
+  max-width: 10rem;
+  aspect-ratio: 2 / 3;
 
   display: flex;
   flex-direction: column;
