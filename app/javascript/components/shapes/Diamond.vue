@@ -1,10 +1,22 @@
+<script setup lang="ts">
+import type {SetCard} from "@/types/set-types";
+import {useStripesPattern} from "@/composables/useStripesPattern.ts";
+
+const {shade} = defineProps<{
+  shade: SetCard['shade']
+}>();
+
+const {isStriped, patternId, fill, StripesPattern} = useStripesPattern(() => shade);
+
+</script>
 <template>
-    <svg class="diamond" viewBox="0 0 300 125" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="150,0 300,62.5 150,125 0,62.5"
-               fill="var(--shape-background)"
-               stroke="var(--shape-color)"
-               stroke-width="var(--shape-border-width"/>
-    </svg>
+  <svg class="diamond" viewBox="0 0 300 125" xmlns="http://www.w3.org/2000/svg">
+    <stripes-pattern v-if="isStriped" :pattern-id="patternId"/>
+    <polygon points="150,0 300,62.5 150,125 0,62.5"
+             :fill="fill"
+             stroke="var(--shape-color)"
+             stroke-width="var(--shape-border-width"/>
+  </svg>
 </template>
 
 <style scoped>

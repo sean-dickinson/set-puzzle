@@ -25,7 +25,7 @@ const cssClasses = computed(() => [
 <template>
 <div class="card" :class="{'card--with-gap': shape !== 'squiggle'}">
   <template v-for="n in number" :key="n">
-    <component :is="shapeComponent" :class="cssClasses" />
+    <component :is="shapeComponent" :class="cssClasses" :shade="shade" />
   </template>
 </div>
 </template>
