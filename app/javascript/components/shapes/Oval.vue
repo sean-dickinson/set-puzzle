@@ -9,9 +9,9 @@ const {shade} = defineProps<{
 const {isStriped, patternId, fill, StripesPattern} = useShapeBackground(() => shade);
 </script>
 <template>
-  <svg class="oval" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <svg class="oval" viewBox="0 0 190 79.1667" xmlns="http://www.w3.org/2000/svg">
     <stripes-pattern v-if="isStriped" :pattern-id="patternId" />
-    <ellipse cx="100" cy="50" rx="96" ry="48"
+    <ellipse cx="95" cy="39.5833" rx="85" ry="37.9167"
              :fill="fill"
              stroke="var(--shape-color)"
              stroke-width="var(--shape-border-width)"/>

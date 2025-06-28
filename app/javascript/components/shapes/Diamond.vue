@@ -10,12 +10,12 @@ const {isStriped, patternId, fill, StripesPattern} = useShapeBackground(() => sh
 
 </script>
 <template>
-  <svg class="diamond" viewBox="0 0 300 125" xmlns="http://www.w3.org/2000/svg">
+  <svg class="diamond" viewBox="0 0 190 79.1667" xmlns="http://www.w3.org/2000/svg">
     <stripes-pattern v-if="isStriped" :pattern-id="patternId"/>
-    <polygon points="150,0 300,62.5 150,125 0,62.5"
+    <polygon points="95,0 180,39.5833 95,79.1667 10,39.5833"
              :fill="fill"
              stroke="var(--shape-color)"
-             stroke-width="var(--shape-border-width"/>
+             stroke-width="var(--shape-border-width)"/>
   </svg>
 </template>
 
