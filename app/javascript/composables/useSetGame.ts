@@ -7,7 +7,7 @@ import {getCardId, isSameCardTriad} from "@/set_game/cardHelpers.ts";
 const foundSets = ref<CardTriad[]>([]);
 const currentSelection = ref<SetCard[]>([]);
 const isGameOver = computed(() => foundSets.value.length === 6);
-const errorMessage = ref('');
+const message = ref('');
 export function useSetGame(){
     const isSetAlreadyFound = (cards: CardTriad): boolean =>
          foundSets.value.some(set => isSameCardTriad(set, cards));
@@ -23,14 +23,24 @@ export function useSetGame(){
         }
     }
 
+    const getSuccessMessage = () => {
+        const numberOfSetsRemaining = 6 - foundSets.value.length;
+        if(numberOfSetsRemaining === 0){
+            return 'You found all sets! Congratulations!';
+        }
+        const plural = numberOfSetsRemaining > 1 ? 's' : '';
+        return `You found a set! ${numberOfSetsRemaining} set${plural} remaining.`;
+
+    }
+
     watchEffect(() => {
         if(currentSelection.value.length !== 3){
             return;
         }
-        errorMessage.value = '';
+        message.value = '';
 
         if(isSetAlreadyFound(currentSelection.value as CardTriad)){
-            errorMessage.value = 'You already found that one';
+            message.value = 'You already found that one';
             clearSelection();
             return;
         }
@@ -38,8 +48,9 @@ export function useSetGame(){
         const result = checkSet(currentSelection.value as CardTriad);
         if(result.success === true){
             foundSets.value.push(result.cards);
+            message.value = getSuccessMessage();
         } else {
-            errorMessage.value = result.message;
+            message.value = 'Not a set. ' + result.message;
         }
         clearSelection();
     });
@@ -50,6 +61,6 @@ export function useSetGame(){
         toggleSelection,
         foundSets,
         currentSelection,
-        errorMessage
+        message
     }
 }

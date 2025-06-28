@@ -36,12 +36,10 @@ const activeCards = computed(() =>
 .cards {
   display: grid;
   place-items: center;
-  grid-template-rows: repeat(3, auto);
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
   max-width: 1000px;
   width: 100%;
-  margin: 0 auto;
 }
 </style>
