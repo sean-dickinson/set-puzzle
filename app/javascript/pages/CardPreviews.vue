@@ -26,7 +26,7 @@ const attributesWithoutNumber = ATTRIBUTES.filter(attr => attr !== 'number');
       </select>
     </div>
     <div class="card-container">
-      <Card v-for="number in 3" v-bind="selectedAttributes" :number="number"/>
+      <Card v-for="number in 3" v-bind="selectedAttributes" :number="number as SetCard['number']"/>
     </div>
   </section>
 </template>

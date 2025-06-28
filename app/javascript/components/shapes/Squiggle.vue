@@ -19,12 +19,3 @@ const {isStriped, patternId, fill, StripesPattern} = useShapeBackground(() => sh
     />
   </svg>
 </template>
-
-<style scoped>
-.squiggle {
-  display: block;
-  flex: 0 0 auto;
-  max-width: 60%;
-  aspect-ratio: 1.75;
-}
-</style>

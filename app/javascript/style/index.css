@@ -9,6 +9,12 @@ html {
     }
 }
 
+.shape {
+    display: block;
+    flex: 0 0 auto;
+    max-width: 60%;
+    aspect-ratio: 1.9;
+}
 .color {
     &.color--red {
         --shape-color: var(--set-red-color);
