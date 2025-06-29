@@ -8,7 +8,21 @@ html {
         box-sizing: border-box;
     }
 }
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
 
+.shape {
+    display: block;
+    flex: 0 0 auto;
+    max-width: 60%;
+    min-width: 2.5rem;
+    aspect-ratio: 1.9;
+}
 .color {
     &.color--red {
         --shape-color: var(--set-red-color);
@@ -24,17 +38,6 @@ html {
 .shade {
     &.shade--solid {
      --shape-background: var(--shape-color);
-    }
-    &.shade--striped {
-        --stripe-width: 2px;
-        --stripe-gap: 10px;
-        --shape-background: repeating-linear-gradient(
-            90deg,
-            var(--shape-color),
-            var(--shape-color) var(--stripe-width),
-            transparent var(--stripe-width),
-            transparent var(--stripe-gap)
-        );
     }
     &.shade--open {
         --shape-background: transparent;

@@ -12,7 +12,7 @@ export type SetCard = {
 
 export type ShapeProps = Pick<SetCard, 'color' | 'shade'>
 
-export type Puzzle = {
+export type DailyPuzzle = {
   cards: SetCard[],
   date: string,
 }
