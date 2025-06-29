@@ -41,7 +41,7 @@ const cssClasses = computed(() => [
   padding: 1rem;
   width: 100%;
   max-width: 10rem;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 3 / 4;
 
   display: flex;
   flex-direction: column;

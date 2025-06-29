@@ -39,7 +39,6 @@ const activeCards = computed(() =>
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
-  max-width: 1000px;
   width: 100%;
 }
 </style>

@@ -52,7 +52,7 @@ header {
 }
 .game-area {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 1rem;
   align-self: stretch;
   align-items: stretch;
