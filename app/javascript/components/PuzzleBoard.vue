@@ -40,5 +40,6 @@ const activeCards = computed(() =>
   gap: 1rem;
   padding: 1rem;
   width: 100%;
+  max-height: 85vh;
 }
 </style>

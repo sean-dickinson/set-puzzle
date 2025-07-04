@@ -3,16 +3,22 @@ import PuzzleBoard from "@/components/PuzzleBoard.vue";
 import FoundSets from "@/components/FoundSets.vue";
 import {useSetGame} from "@/composables/useSetGame.ts";
 import type {SetCard} from "@/types/set-types";
-import {watchEffect} from "vue";
+import {watch, onMounted, ref} from "vue";
 
 const {cards} = defineProps<{ cards: SetCard[] }>();
 
 const {message, foundSets, isGameOver, toggleSelection} = useSetGame();
-
-watchEffect(() => {
+const startTime = ref<number>();
+const emit = defineEmits<{
+  'game-over': [time: number]
+}>();
+watch(isGameOver, () => {
   if (isGameOver.value) {
-    // Redirect? or do something here
+    emit('game-over', Date.now() - startTime.value);
   }
+})
+onMounted(() => {
+  startTime.value = Date.now();
 })
 </script>
 
