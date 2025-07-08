@@ -8,10 +8,6 @@ image: atinybeardedman/set-game
 servers:
   web:
     - 134.122.7.197
-  job:
-    hosts:
-     - 134.122.7.197
-    cmd: bin/jobs
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
