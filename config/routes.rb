@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   end
 
   resources :puzzles, only: %i[show], param: :date
-  get "daily-puzzle", to: "puzzles#show", defaults: { date: Time.current.to_date }, as: :daily_puzzle
+  get "daily-puzzle", to: "puzzles#show", as: :daily_puzzle
 end
