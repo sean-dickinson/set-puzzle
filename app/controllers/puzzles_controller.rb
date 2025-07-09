@@ -7,6 +7,8 @@ class PuzzlesController < ApplicationController
   private
 
   def date_param
-    params.expect(:date)
+    params.tap do |p|
+      p[:date] = p[:date].presence || Date.current.to_s
+    end.expect(:date)
   end
 end
