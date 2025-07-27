@@ -34,12 +34,11 @@ const activeCards = computed(() =>
 
 <style scoped>
 .cards {
+  container-type: size;
   display: grid;
-  place-items: center;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: 1rem;
   padding: 1rem;
-  width: 100%;
-  max-height: 75vh;
 }
 </style>
