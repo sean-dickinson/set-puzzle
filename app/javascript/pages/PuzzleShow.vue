@@ -15,8 +15,22 @@ const gameOver = (time: number) => {
   isGameOver.value = true;
   timeElapsed.value = time;
 };
+const timeElapsedDisplay = computed(() => {
+  const seconds = timeElapsed.value / 1000;
+  let display = '';
+  if( seconds >= 60) {
+    const minutes = Math.floor(seconds / 60);
+    const unit = minutes > 1 ? 'minutes' : 'minute';
+    display += `${minutes} ${unit} and `;
+  }
+  const roundedSeconds = (seconds % 60).toFixed(2);
+
+
+  return (display + `${roundedSeconds} seconds`).trim();
+})
 const showStartScreen = computed(() => !isStarted.value && !isGameOver.value);
 const showPuzzle = computed(() => isStarted.value && !isGameOver.value);
+
 </script>
 
 <template>
@@ -31,7 +45,7 @@ const showPuzzle = computed(() => isStarted.value && !isGameOver.value);
   </puzzle>
   <div v-else class="puzzle-game-over">
     <h1>You found them all!</h1>
-    <h2>You completed this puzzle in {{ timeElapsed / 1000 }} seconds!</h2>
+    <h2>You completed this puzzle in {{ timeElapsedDisplay }}!</h2>
   </div>
 </template>
 

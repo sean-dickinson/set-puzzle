@@ -33,10 +33,8 @@ onMounted(() => {
         </transition>
       </div>
     </header>
-    <section class="game-area">
-      <puzzle-board :cards="cards" @toggle-card="toggleSelection"/>
-      <found-sets :sets="foundSets"/>
-    </section>
+    <puzzle-board :cards="cards" @toggle-card="toggleSelection"/>
+    <found-sets :sets="foundSets"/>
   </main>
 </template>
 
@@ -45,25 +43,18 @@ onMounted(() => {
   height: 100dvh;
   display: grid;
   grid-template-rows: max-content 1fr;
+  grid-template-columns: 2.5fr 1fr;
 }
 header {
   background: #f0f0f0;
   padding: 0.25rem;
   border-bottom: 2px solid #ccc;
   text-align: center;
+  grid-column: 1 / span 2;
   & h2 {
     margin: 0;
     padding: 0.25rem;
   }
-}
-.game-area {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 1rem;
-  align-self: stretch;
-  align-items: stretch;
-  justify-items: center;
-  background: #f0f0f0;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;

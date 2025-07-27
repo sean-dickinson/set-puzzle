@@ -20,6 +20,7 @@ const {sets} = defineProps<{
 
 <style scoped>
 .found-sets {
+  container-type: size;
   text-align: center;
   justify-self: stretch;
   padding: 1rem;
@@ -33,6 +34,7 @@ const {sets} = defineProps<{
 
   & .set {
     display: flex;
+    justify-content: center;
     gap: 1rem;
   }
 }
