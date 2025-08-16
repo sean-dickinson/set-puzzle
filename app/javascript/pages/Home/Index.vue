@@ -68,9 +68,11 @@ const {today} = defineProps<{
 }
 .past__cards {
   display: grid;
-  place-content: center;
+  align-content: center;
+  justify-content: start;
   grid-template-columns: repeat(5, 1fr);
   column-gap: 1rem;
+  overflow-y: auto;
 
   .past-card-link {
     text-decoration: none;
