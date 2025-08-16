@@ -19,9 +19,11 @@ const {today} = defineProps<{
       <h1 class="display">Daily Set Puzzle</h1>
       <h2>Play Today's Puzzle</h2>
     </div>
-    <Link class="today__card" href="/daily-puzzle">
-      <Card v-bind="today.card"/>
-    </Link>
+    <div class="today__card">
+      <Link  href="/daily-puzzle">
+        <Card v-bind="today.card"/>
+      </Link>
+    </div>
   </section>
 </template>
 
