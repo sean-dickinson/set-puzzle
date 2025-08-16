@@ -1,13 +1,13 @@
 class HomeController < ApplicationController
   def index
     render inertia: "Home/Index", props: {
-      current_puzzle:
+      today:
     }
   end
 
   private
 
-  def current_puzzle
+  def today
     puzzle = Puzzle.find_by!(date: Date.current.to_s)
 
     {

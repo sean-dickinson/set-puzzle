@@ -10,7 +10,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       get home_index_url
 
       assert_response :success
-      assert_props current_puzzle: { card: expected_card, date: Date.current.to_s }
+      assert_props today: { card: expected_card, date: Date.current.to_s }
     end
   end
 end
