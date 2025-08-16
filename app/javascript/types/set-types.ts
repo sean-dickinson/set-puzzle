@@ -16,3 +16,9 @@ export type DailyPuzzle = {
   cards: SetCard[],
   date: string,
 }
+
+export type PuzzlePreview = {
+    id: number,
+    card: SetCard,
+    date: string,
+}

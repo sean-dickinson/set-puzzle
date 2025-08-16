@@ -3,6 +3,7 @@
 import type {DailyPuzzle} from "@/types/set-types";
 import Puzzle from "@/components/Puzzle.vue";
 import {computed, ref} from "vue";
+import AppHead from "@/components/AppHead.vue";
 
 const {puzzle} = defineProps<{
   puzzle: DailyPuzzle;
@@ -34,6 +35,7 @@ const showPuzzle = computed(() => isStarted.value && !isGameOver.value);
 </script>
 
 <template>
+  <AppHead :title="puzzle.date" />
   <div v-if="showStartScreen" class="puzzle-start">
     <h1>Daily Puzzle for {{ puzzle.date }}</h1>
     <button @click="isStarted = true">Start Puzzle</button>
