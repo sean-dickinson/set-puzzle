@@ -52,7 +52,7 @@ const cssClasses = computed(() => [
 
   transition: transform 0.2s ease;
 
-  &.card--active {
+  &.card--active, &:hover {
     transform: scale(0.9);
     --card-border-color: red;
   }
