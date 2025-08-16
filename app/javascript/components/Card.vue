@@ -23,9 +23,9 @@ const cssClasses = computed(() => [
 </script>
 
 <template>
-<div class="card">
+<div class="card" :class="cssClasses">
   <template v-for="n in number" :key="n">
-    <component :is="shapeComponent" class="shape" :class="cssClasses" :shade="shade" />
+    <component :is="shapeComponent" class="shape" :shade="shade" />
   </template>
 </div>
 </template>
@@ -54,7 +54,7 @@ const cssClasses = computed(() => [
 
   &.card--active, &:hover {
     transform: scale(0.9);
-    --card-border-color: red;
+    --card-border-color: var(--shape-color);
   }
 }
 </style>
