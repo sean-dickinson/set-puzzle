@@ -79,6 +79,11 @@ module InertiaHelper
     assert_includes expected_props, inertia.props, "Inertia props do not include expected props"
   end
 
+  def assert_prop_equals(prop_name, expected_value)
+    assert inertia.props.key?(prop_name), "Inertia props do not include expected prop '#{prop_name}'"
+    assert_equal expected_value, inertia.props[prop_name], "Inertia prop '#{prop_name}' does not match expected value"
+  end
+
   def assert_component_rendered(expected_component)
     assert_equal expected_component, inertia.component, "Unexpected component rendered with inertia"
   end

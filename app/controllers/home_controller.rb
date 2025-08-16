@@ -1,18 +1,21 @@
 class HomeController < ApplicationController
   def index
     render inertia: "Home/Index", props: {
-      today:
+      today:,
+      past:
     }
   end
 
   private
 
   def today
-    puzzle = Puzzle.find_by!(date: Date.current.to_s)
+    Puzzle.find_by!(date: Date.current.to_s).to_preview
+  end
 
-    {
-      card: puzzle.cards.first,
-      date: puzzle.date.to_s
-    }
+  def past
+    Puzzle.where("date < ?", Date.current)
+          .order(date: :desc)
+          .limit(5)
+          .map(&:to_preview)
   end
 end
