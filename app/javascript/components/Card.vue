@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import  type {SetCard} from "@/types/set-types";
+import type {SetCard} from "@/types/set-types";
 import Oval from "@/components/shapes/Oval.vue";
 import Diamond from "@/components/shapes/Diamond.vue";
 import Squiggle from "@/components/shapes/Squiggle.vue";
 import {computed, markRaw} from "vue";
 
-const { number, shade, shape, color } = defineProps<SetCard>();
+const {number, shade, shape, color} = defineProps<SetCard>();
 const shapeComponents = {
   oval: Oval,
   diamond: Diamond,
@@ -23,11 +23,11 @@ const cssClasses = computed(() => [
 </script>
 
 <template>
-<div class="card" :class="cssClasses">
-  <template v-for="n in number" :key="n">
-    <component :is="shapeComponent" class="shape" :shade="shade" />
-  </template>
-</div>
+  <div class="card" :class="cssClasses">
+    <template v-for="n in number" :key="n">
+      <component :is="shapeComponent" class="shape" :shade="shade"/>
+    </template>
+  </div>
 </template>
 
 <style scoped>
@@ -52,9 +52,16 @@ const cssClasses = computed(() => [
 
   transition: transform 0.2s ease;
 
-  &.card--active, &:hover {
+  &.card--active {
     transform: scale(0.9);
     --card-border-color: var(--shape-color);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(0.9);
+      --card-border-color: var(--shape-color);
+    }
   }
 }
 </style>
