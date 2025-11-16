@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   private
 
   def today
+    create_today_if_needed!
     Puzzle.find_by!(date: Date.current.to_s).to_preview
   end
 
@@ -17,5 +18,11 @@ class HomeController < ApplicationController
           .order(date: :desc)
           .limit(5)
           .map(&:to_preview)
+  end
+
+  def create_today_if_needed!
+    return unless Rails.env.local?
+
+    GenerateDailyPuzzleJob.perform_now unless Puzzle.find_by(date: Date.current.to_s).present?
   end
 end
