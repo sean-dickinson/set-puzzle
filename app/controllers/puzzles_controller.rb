@@ -1,4 +1,5 @@
 class PuzzlesController < ApplicationController
+  allow_unauthenticated_access
   def show
     puzzle = Puzzle.find_by(date: date_param)
     render inertia: "PuzzleShow", props: { puzzle: puzzle.as_json }
