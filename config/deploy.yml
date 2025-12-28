@@ -32,7 +32,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - SEEDED_USERNAME
-    - SEEDED_USER_PASSWORD
+    - SEEDED_USER_EMAIL
     - SEEDED_USER_PASSWORD
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
