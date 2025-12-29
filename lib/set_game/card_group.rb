@@ -1,17 +1,39 @@
 module SetGame
-  class CardGroup
-    def initialize(cards)
-      @attribute_tally = AttributeTally.from_cards(cards)
+  CardGroup = Data.define(:cards) do
+    include Comparable
+    class << self
+      def from(cards)
+        new(cards.map { Card.from(it) })
+      end
     end
 
     def is_set?
       valid_counts.include?(count_pair)
     end
 
+    def ==(other)
+      return false unless other.is_a? CardGroup
+
+      same_size = cards.size == other.cards.size
+      same_cards = (cards - other.cards).empty?
+      same_size && same_cards
+    end
+    alias eql? ==
+
+    def to_s
+      cards.sort.to_s
+    end
+    alias inspect to_s
+
+    def <=>(other)
+      to_s <=> other.to_s
+    end
+
     private
 
     def count_pair
-      [ @attribute_tally.constant_count, @attribute_tally.unique_count ]
+      tally = AttributeTally.from_cards(cards)
+      [ tally.constant_count, tally.unique_count ]
     end
 
     def valid_counts
