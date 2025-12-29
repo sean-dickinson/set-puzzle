@@ -1,24 +1,26 @@
 module SetGame
   Card = Data.define(*ATTRIBUTES) do
+    include Comparable
     class << self
-      def from(string_or_hash)
-        case string_or_hash
-        when String then from_id(string_or_hash)
-        when Hash then from_hash(string_or_hash)
+      def from(value)
+        case value
+        when self then value
+        when String then from_string(value)
+        when Hash then from_hash(value)
         else
-          raise ArgumentError, "Expected String or Hash, got #{string_or_hash.class}"
+          raise ArgumentError, "Expected String or Hash, got #{value.class}"
         end
       end
 
       private
 
-      def from_id(id)
-        number, shade, color, shape = id.split("-")
+      def from_string(str)
+        number, shade, color, shape = str.split
         new(
           number: number.to_i,
           shade: shade.to_sym,
           color: color.to_sym,
-          shape: shape.to_sym
+          shape: SetGame.singluarize(shape).to_sym
         )
       end
 
@@ -35,20 +37,13 @@ module SetGame
     end
 
     def to_s
-      base = "#{number} #{shade} #{color} #{shape}"
-      if number > 1
-        base + "s"
-      else
-        base
-      end
+      s = "#{number} #{shade} #{color} #{shape}"
+      SetGame.pluralize(number, s)
     end
+    alias inspect to_s
 
-    def id
-      [ number, shade, color, shape ].join("-")
-    end
-
-    def ==(other)
-      ATTRIBUTES.all? { |attribute| send(attribute) == other.send(attribute) }
+    def <=>(other)
+      to_s <=> other.to_s
     end
   end
 end

@@ -2,9 +2,11 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require_relative "support/inertia_helper"
+require_relative "support/array_helper"
 
 module ActiveSupport
   class TestCase
+    include ArrayHelper
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
 

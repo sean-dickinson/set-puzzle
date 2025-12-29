@@ -2,42 +2,46 @@ require "test_helper"
 
 class PuzzleCompletionTest < ActiveSupport::TestCase
   def setup
-    @cards = [ { "color" => "red", "shape" => "oval", "number" => 1, "shade" => "striped" },
-              { "color" => "purple", "shape" => "oval", "number" => 1, "shade" => "open" },
-              { "color" => "green", "shape" => "diamond", "number" => 2, "shade" => "solid" },
-              { "color" => "red", "shape" => "diamond", "number" => 3, "shade" => "open" },
-              { "color" => "red", "shape" => "squiggle", "number" => 3, "shade" => "solid" },
-              { "color" => "green", "shape" => "oval", "number" => 2, "shade" => "open" },
-              { "color" => "red", "shape" => "squiggle", "number" => 2, "shade" => "open" },
-              { "color" => "red", "shape" => "diamond", "number" => 2, "shade" => "solid" },
-              { "color" => "red", "shape" => "oval", "number" => 2, "shade" => "solid" },
-              { "color" => "purple", "shape" => "diamond", "number" => 2, "shade" => "solid" },
-              { "color" => "red", "shape" => "oval", "number" => 3, "shade" => "open" },
-              { "color" => "red", "shape" => "squiggle", "number" => 1, "shade" => "striped" } ]
+    @sets = [
+      [ "1 striped red oval", "2 solid red ovals", "3 open red ovals" ],
+      [ "1 open purple oval", "2 open green ovals", "3 open red ovals" ],
+      [ "2 solid green diamonds", "2 solid purple diamonds", "2 solid red diamonds" ],
+      [ "1 striped red squiggle", "2 solid red ovals", "3 open red diamonds" ],
+      [ "1 striped red squiggle", "2 open red squiggles", "3 solid red squiggles" ],
+      [ "1 striped red squiggle", "2 solid red diamonds", "3 open red ovals" ]
+    ].map { SetGame::CardGroup.from(it) }
+    @cards = @sets.flat_map(&:cards).uniq
+    @puzzle = Puzzle.new(cards: @cards, date: Date.today)
   end
 
   test "it is not valid if the sets are empty" do
-    completion = PuzzleCompletion.new(sets: [])
+    completion = PuzzleCompletion.new(sets: [], puzzle: @puzzle)
     refute completion.valid?
     assert completion.errors.include? :sets
   end
 
-  test "it is not valid if any set does not contain exactly three cards" do
-    completion = PuzzleCompletion.new(sets: [ [ @cards[0], @cards[1] ],
-                                              [ @cards[2], @cards[3], @cards[4] ],
-                                              [ @cards[5], @cards[6], @cards[7], @cards[8] ] ])
+  test "is not valid if any set is not a valid set" do
+    sets = @sets.dup
+    # replace the first set with an invalid set
+    sets[0] = SetGame::CardGroup.from([ "1 striped red oval", "1 open purple oval", "2 solid green diamonds" ])
+    completion = PuzzleCompletion.new(sets:, puzzle: @puzzle)
     refute completion.valid?
     assert completion.errors.include? :sets
   end
 
-  it "is not valid if any set is not a valid set" do
-    completion = PuzzleCompletion.new(sets: [ [ @cards[0], @cards[1], @cards[2] ],
-                                              [ @cards[3], @cards[4], @cards[5] ],
-                                              [ @cards[6], @cards[7], @cards[8] ] ])
+  test "it is not valid if there are sets that are not part of the puzzle" do
+    extra_set = SetGame::CardGroup.from([ "1 solid red diamond", "2 solid red diamond", "3 solid red diamond" ])
+    sets = [
+      extra_set,
+      *@sets[...-1]
+    ]
+    completion = PuzzleCompletion.new(sets:, puzzle: @puzzle)
     refute completion.valid?
     assert completion.errors.include? :sets
   end
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test "it is valid if all sets are valid and part of the puzzle" do
+    completion = PuzzleCompletion.new(sets: @sets, puzzle: @puzzle, user: User.new)
+    assert completion.valid?
+  end
 end
