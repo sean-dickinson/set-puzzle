@@ -1,8 +1,9 @@
 module SetGame
   CardGroup = Data.define(:cards) do
+    include Comparable
     class << self
       def from(cards)
-        new(cards.map { Card.from(it) }.sort_by(&:to_s))
+        new(cards.map { Card.from(it) })
       end
     end
 
@@ -20,9 +21,13 @@ module SetGame
     alias eql? ==
 
     def to_s
-      cards.to_s
+      cards.sort.to_s
     end
     alias inspect to_s
+
+    def <=>(other)
+      to_s <=> other.to_s
+    end
 
     private
 
